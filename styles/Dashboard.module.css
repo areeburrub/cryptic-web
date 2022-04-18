@@ -1,0 +1,280 @@
+
+.logo {
+  font-family: Dosis;
+  font-size: 1.5em;
+  font-weight: 300;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 30px;
+  position: fixed;
+  top: 30px;
+  left: 20px;
+  width: 20vw;
+}
+
+.user{
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background: #fff;
+    width: 60vw;
+    max-width: 300px;
+    justify-content: space-between;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 50px;
+    box-shadow: 0px 0px 101px -18px rgba(0,0,0,0.65);
+    z-index: 999;
+    user-select: none;
+}
+.user img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+}
+.user .username{
+    font-family: Roboto;
+    font-size: 2.5ch;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.user .points{
+    background: #3A5FE5;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 50px;
+    font-family: Roboto;
+    font-size: 2ch;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.mainArea{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 15vh 1vw;
+}
+
+
+
+@media (max-width: 1024px) {
+    .mainArea{
+        flex-direction: column;
+    }
+}
+
+.mainArea .QuestionBox{
+    display: flex;
+    flex-direction: column;
+    margin: 5vh auto;
+    width: 90vw;
+    max-width: 1200px;
+    background: #fff;
+    border-radius: 30px;
+}
+
+.leaderboard{
+    flex-direction: column;
+    background: #1E0707;
+    color:#fff;
+    width: 80vw;
+    height:500px;
+    text-align:center;
+    margin: 5vh auto;
+    padding: 10px;
+    border-radius: 50px;
+    border: #fbeeee solid 2px;
+    box-shadow: 0px 0px 26px -22px rgba(255,21,21,0.73);
+    overflow:hidden;
+}
+
+
+
+@media (min-width: 1024px) {
+    .mainArea .QuestionBox{
+        display: flex;
+        flex-direction: column;
+        margin: 5vh auto;
+        margin-right: 20px;
+        width: 90vw;
+        max-width: 1200px;
+        background: #fff;
+    }
+    .leaderboard{
+    flex-direction: column;
+    background: #1E0707;
+    color:#fff;
+    width: 60vw;
+    max-width: 350px;
+    height:500px;
+    text-align:center;
+    margin: 5vh auto;
+    padding: 10px;
+    border-radius: 50px;
+    border: #fbeeee solid 2px;
+    box-shadow: 0px 0px 26px -22px rgba(255,21,21,0.73);
+    overflow:hidden;
+}
+}
+
+.leaderboard .players{
+    height:450px;
+    overflow-y:scroll;
+}
+.leaderboard .players::-webkit-scrollbar {
+    width: 1px;
+}
+
+.leaderboard .players::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+ 
+
+
+.leaderboard .player{
+    display:flex;
+    justify-content:space-between;
+    align-items: center;
+    width:100%;
+    height:50px;
+    background:#fff;
+    color:#000;
+    border-radius:20px;
+    overflow:hidden;
+    margin:10px 0;
+    box-shadow: 0px 0px 26px -12px rgba(255,21,21,0.73);
+}
+.leaderboard .player .playerImg{
+    width:40px;
+    height:40px;
+    margin:5px;
+    border-radius:20px;
+}
+
+.leaderboard .player .playerName{
+    font-family: Roboto;
+    font-size: 2.2ch;
+    font-weight: bold;
+    margin-left: 10px;
+}
+.leaderboard .player .playerPts{
+    background: #3A5FE5;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 50px;
+    font-family: Roboto;
+    font-size: 2ch;
+    font-weight: bold;
+    margin: 0 10px;
+}
+
+.QuestionBox .details{
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    top:0;
+    padding: 10px;
+}
+
+.QuestionBox .details .value{
+    background: #3A5FE5;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 50px;
+    font-family: Roboto;
+    font-size: 2ch;
+    font-weight: bold;
+    margin: 0 10px;
+}
+
+.QuestionBox .details .level{
+    background: #073e1e;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 50px;
+    font-family: Roboto;
+    font-size: 2ch;
+    font-weight: bold;
+    margin: 0 10px;
+}
+
+.QuestionBox .question {
+    margin: 10px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.QuestionBox .question .questionText{
+    font-family: Dosis;
+    font-size: 3ch;
+    margin: 0 10px;
+}
+
+.QuestionBox .question .questionInput{
+    margin: 20px 1px;
+}
+
+.QuestionBox .question .questionInput .answer{
+    width: 65%;
+    max-width: 300px;
+    height: 50px;
+    border-radius: 20px;
+    border: #3A5FE5 solid 2px;
+    margin: 10px;
+    padding: 10px;
+    font-family: Roboto;
+    font-size: 3ch;
+}
+
+.QuestionBox .question .questionInput .submit {
+    height: 50px;
+    border-radius: 20px;
+    border: #3A5FE5 solid 2px;
+    color: #3A5FE5;
+    background: #f1f1f1;
+    margin: 10px;
+    padding: 10px;
+    font-family: Roboto;
+    font-size: 3ch;
+    transition: .2s all;
+    cursor: pointer;
+    user-select: none;
+}
+.QuestionBox .question .questionInput .submit:hover {
+    transform: scale(1.1) rotate(2deg);
+}
+.QuestionBox .question .questionInput .submit:active {
+    transform: scale(1.2) rotate(0deg);
+    background: #bcbcbc;
+}
+
+.QuestionBox .question .questionInput .hint {
+    height: 50px;
+    border-radius: 20px;
+    border: #ff1515 solid 2px;
+    color: #ff1515;
+    background: #f1f1f1;
+    margin: 10px;
+    padding: 10px;
+    font-family: Roboto;
+    font-size: 3ch;
+    transition: .2s all;
+    cursor: pointer;
+    user-select: none;
+}
+
+.QuestionBox .question .questionInput .hint:hover {
+    transform: scale(1.1) rotate(2deg);
+}
+
+.QuestionBox .question .questionInput .hint:active {
+    transform: scale(1.2) rotate(0deg);
+    background: #bcbcbc;
+}
