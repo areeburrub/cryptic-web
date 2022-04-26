@@ -1,0 +1,12 @@
+.input{
+  display: flex;
+  flex-direction:row;
+}
+.input .command{
+  margin:0;
+  margin-left:10px;
+}
+
+.output{
+  white-space: pre-wrap;
+}

@@ -53,8 +53,6 @@ export const UserContextProvider = (props) => {
       const { error, user } = await AuthService.loginWithGoogle();
       setError(error ?? "");
       setUser(user ?? null);
-
-
       const docRef = doc(db, "Users", user.uid);
       const docSnap = await getDoc(docRef);
       const userProfile = {
@@ -64,12 +62,12 @@ export const UserContextProvider = (props) => {
               photo : user.photoURL,
               createdAt : new Date().toISOString(),
               points : docSnap.points || 0,
-              completed : docSnap.completed || 0,
+              level : docSnap.completed || 1,
+              hint:false
           }
       setUser(userProfile ?? null);
-
       if(!docSnap.exists()){
-          await setDoc(docRef, userProfile );   
+          await setDoc(docRef, userProfile );
       }else{
           setUser(docSnap.data() ?? null);
       }

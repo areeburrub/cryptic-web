@@ -58,7 +58,7 @@
     display:flex;
     flex-direction: row;
     justify-content: center;
-    margin: 15vh 1vw;
+    margin: 15vh 1vw 1vw 0;
 }
 
 
@@ -204,77 +204,37 @@
     margin: 0 10px;
 }
 
-.QuestionBox .question {
-    margin: 10px;
-    padding: 5px;
+.QuestionBox .terminal{
     display: flex;
     flex-direction: column;
+    width: 95%;
+    height: 30vw;
+    min-height: 500px;
+    margin : 10px auto;
+    padding : 20px;
+    background: #000;
+    border-radius: 30px;
+    color:#39ff14;
+    font-size: 2ch;
+    line-height: 30px;
+    font-family: monospace;
+    overflow-y: scroll;
+    padding-bottom: 20vh;
 }
 
-.QuestionBox .question .questionText{
-    font-family: Dosis;
-    font-size: 3ch;
-    margin: 0 10px;
+.QuestionBox .terminal::-webkit-scrollbar {
+    width: 1px;
 }
 
-.QuestionBox .question .questionInput{
-    margin: 20px 1px;
-}
-
-.QuestionBox .question .questionInput .answer{
-    width: 65%;
-    max-width: 300px;
-    height: 50px;
-    border-radius: 20px;
-    border: #3A5FE5 solid 2px;
-    margin: 10px;
-    padding: 10px;
-    font-family: Roboto;
-    font-size: 3ch;
-}
-
-.QuestionBox .question .questionInput .submit {
-    height: 50px;
-    border-radius: 20px;
-    border: #3A5FE5 solid 2px;
-    color: #3A5FE5;
-    background: #f1f1f1;
-    margin: 10px;
-    padding: 10px;
-    font-family: Roboto;
-    font-size: 3ch;
-    transition: .2s all;
-    cursor: pointer;
-    user-select: none;
-}
-.QuestionBox .question .questionInput .submit:hover {
-    transform: scale(1.1) rotate(2deg);
-}
-.QuestionBox .question .questionInput .submit:active {
-    transform: scale(1.2) rotate(0deg);
-    background: #bcbcbc;
-}
-
-.QuestionBox .question .questionInput .hint {
-    height: 50px;
-    border-radius: 20px;
-    border: #ff1515 solid 2px;
-    color: #ff1515;
-    background: #f1f1f1;
-    margin: 10px;
-    padding: 10px;
-    font-family: Roboto;
-    font-size: 3ch;
-    transition: .2s all;
-    cursor: pointer;
-    user-select: none;
-}
-
-.QuestionBox .question .questionInput .hint:hover {
-    transform: scale(1.1) rotate(2deg);
-}
-
-.QuestionBox .question .questionInput .hint:active {
-    transform: scale(1.2) rotate(0deg);
-    background: #bcbcbc;
+.terminal input{
+    width: 30%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #39ff14;
+    font-size: 2ch;
+    font-family: monospace;
+    padding: 0;
+    margin: 0;
+    margin-left:10px;
 }
