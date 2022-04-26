@@ -44,7 +44,6 @@ export function withProtected(Component) {
     }, []);
 
 
-    console.log(useauth.user);
     if (!useauth.user || !EmailExist) {
       router.replace("/");
       toast.info("Please Login using Registered Email", { toastId: "unique" });

@@ -80,12 +80,10 @@ const Home = () => {
   
   const q = query(collection(db, "Questions"), where("level", "==", userData.level));
   const querySnapshot = await getDocs(q);
-  console.log(querySnapshot);
   const data = [];
   querySnapshot.forEach((doc) => {
     data.push(doc.data());
   });
-  console.log(data[0])
   setPoint(data[0].pts);
   }
 
