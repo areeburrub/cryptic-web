@@ -279,6 +279,7 @@
     overflow:hidden;
     margin:10px 0;
     box-shadow: 0px 0px 26px -12px rgba(255,21,21,0.73);
+    cursor:pointer;
 }
  .player .playerImg{
     width:40px;
@@ -301,4 +302,46 @@
     font-size: 2ch;
     font-weight: bold;
     margin: 0 10px;
+}
+
+
+/* Attempt */
+
+.attempt{
+  display: flex;
+  flex-direction: column;
+  width: 90vw;
+  max-width: 600px;
+  margin: 20px auto;
+  background:#fff;
+  border-radius: 20px;
+  padding: 10px;
+}
+.attemptDetail{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1px auto;
+  background:#fff;
+  border-radius: 20px;
+}
+
+.attemptDetail span{
+  font-size: 2ch;
+  font-family: ubuntu;
+  padding: 5px 10px;
+  text-align: center;
+  background: #3A5FE5;
+  color: #fff;
+  margin: 5px;
+  border-radius: 15px;
+}
+.attemptAnswer p{
+  white-space: pre-wrap;
+  font-size: 3ch;
+  font-family: ubuntu;
+  text-align: left;
+  margin: 5px 20px;
 }

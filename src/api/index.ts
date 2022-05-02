@@ -6,7 +6,9 @@ import {
   collection,
   where,
   orderBy,
-  getDoc
+  getDoc,
+  serverTimestamp,
+  addDoc 
 } from "firebase/firestore";
 import axios from 'axios';
 
@@ -37,6 +39,7 @@ export const checkAnswer = async (args: string[]) =>{
   const docRef = doc(db, "Users", user.uid);
   const docSnap = await getDoc(docRef);
   const userData = docSnap.data();
+
   
   const q = query(collection(db, "Questions"), where("level", "==", userData.level));
   const querySnapshot = await getDocs(q);
@@ -47,6 +50,16 @@ export const checkAnswer = async (args: string[]) =>{
   });
   
   const output = (answer == data[0].answer) ? true : false;
+  
+  //Add Attempt
+  const attempt = await addDoc(collection(db, "Attempts"), {
+    uid : userData.uid,
+    level : userData.level,
+    answer : answer,
+    time : serverTimestamp(),
+    check : output,
+    hint : userData.hint
+  });
   return output;
 }
 

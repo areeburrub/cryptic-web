@@ -13,6 +13,8 @@
     "@datapunt/matomo-tracker-react": "^0.5.1",
     "axios": "^0.27.1",
     "firebase": "^9.6.10",
+    "framer-motion": "^6.3.3",
+    "framerjs": "^3.0.0",
     "next": "12.1.5",
     "react": "18.0.0",
     "react-dom": "18.0.0",

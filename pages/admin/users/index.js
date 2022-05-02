@@ -1,9 +1,10 @@
 import React from "react";
-import { AdminProtected } from "../../src/routes";
-import styles from "../../styles/Admin.module.css";
+import { AdminProtected } from "../../../src/routes";
+import styles from "../../../styles/Admin.module.css";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import { db } from "../../src/firebase";
+import { db } from "../../../src/firebase";
+
 import {
   doc,
   setDoc,

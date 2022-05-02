@@ -1,4 +1,6 @@
 
+
+
 .logo {
   font-family: Dosis;
   font-size: 1.5em;
@@ -57,15 +59,19 @@
 .mainArea{
     display:flex;
     flex-direction: row;
+    height: fit-content;
     justify-content: center;
-    margin: 15vh 1vw 1vw 0;
-}
+    margin : 0 10px;
+    margin-top: 15vh;
 
+}
 
 
 @media (max-width: 1024px) {
     .mainArea{
         flex-direction: column;
+        height: fit-content;
+        margin-bottom:30vh;
     }
 }
 
@@ -77,6 +83,7 @@
     max-width: 1200px;
     background: #fff;
     border-radius: 30px;
+    height: fit-content;
 }
 
 .leaderboard{
@@ -92,6 +99,7 @@
     border: #fbeeee solid 2px;
     box-shadow: 0px 0px 26px -22px rgba(255,21,21,0.73);
     overflow:hidden;
+    z-index:99;
 }
 
 
@@ -104,7 +112,6 @@
         margin-right: 20px;
         width: 90vw;
         max-width: 1200px;
-        background: #fff;
     }
     .leaderboard{
     flex-direction: column;
@@ -207,10 +214,11 @@
 .QuestionBox .terminal{
     display: flex;
     flex-direction: column;
-    width: 95%;
+    flex-wrap:nowrap;
+    width: 99%;
     height: 30vw;
-    min-height: 500px;
-    margin : 10px auto;
+    min-height: 520px;
+    margin : 20px auto;
     padding : 20px;
     background: #000;
     border-radius: 30px;
@@ -227,7 +235,7 @@
 }
 
 .terminal input{
-    width: 30%;
+    width: 55%;
     background: transparent;
     border: none;
     outline: none;
@@ -238,3 +246,56 @@
     margin: 0;
     margin-left:10px;
 }
+
+
+.bg{
+    z-index:-10;
+}
+
+.bg .bgH {
+    position:fixed;
+    top:0;
+    width:100%;
+    height:100vh;
+    overflow:hidden;
+}
+.bg .bgH .bgHolder{
+    position:fixed;
+    top:0;
+    width:100%;
+    height:100vh;
+    pointer-events: none;
+}
+
+/* Elements */
+
+.elements{
+    z-index: 9999;
+}
+
+
+
+.elements .eleven{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width:20vw;
+    min-width: 300px;
+    user-select: none;
+    z-index: 999;
+}
+
+@media (max-width: 1024px) {
+    
+    .elements .eleven{
+        position: fixed;
+        bottom: 0;
+        right: -20vw;
+        width:20vw;
+        min-width: 300px;
+        user-select: none;
+    }
+
+}
+
+

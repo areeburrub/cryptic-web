@@ -18,6 +18,8 @@ import { useRouter } from "next/router";
 
 
 const Leaderboard = () => {
+  const router = useRouter()
+
   const [players, setPlayers] = useState([]);
 
   useEffect(() => {
@@ -37,7 +39,7 @@ const Leaderboard = () => {
       <div className={styles.players}>
         {players.map((player, index) => {
           return (
-            <div className={styles.player} key={index}>
+            <div title="click to view more" id={player.uid} className={styles.player} key={index} onClick = { (e)=>{router.push('/admin/users/attempt/'+e.target.id)}} >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 className={styles.playerImg}
@@ -45,7 +47,7 @@ const Leaderboard = () => {
                 alt={player.displayName}
               />
               <span className={styles.playerName}>
-                {index+1 + " - " +player.displayName}
+                  {index+1 + " - " +player.displayName}
               </span>
               <span className={styles.playerPts}>{player.points} pts - {player.level} Level</span>
             </div>
