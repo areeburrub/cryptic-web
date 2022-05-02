@@ -12,6 +12,7 @@ import {
   orderBy,
   onSnapshot,
   deleteDoc,
+  getDoc,
   where
 } from "firebase/firestore";
 import { useRouter } from "next/router";
@@ -19,14 +20,21 @@ import { useUserContext } from "../../../../src/context/authContext";
 
 
 const Leaderboard = () => {
-  const { user } = useUserContext();
   const router = useRouter()
   const { uid } = router.query
 
   const [Attempts, setAttempts] = useState([]);
+  const [userData, setuserData] = useState(null);
+  
 
+const getUser = async() =>{
+  const docRef = doc(db, "Users", uid);
+  const docSnap = await getDoc(docRef);
+  const Data = docSnap.data();
+  setuserData(Data);
+}
   useEffect(() => {
-    const q = query(collection(db, "Attempts"), where("uid", "==", uid));
+    const q = query(collection(db, "Attempts"), where("uid", "==", uid), orderBy("time","desc"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const data = [];
       querySnapshot.forEach((doc) => {
@@ -34,10 +42,14 @@ const Leaderboard = () => {
       });
       setAttempts(data);
     });
+    getUser();
   }, []);
+
+
   return (
     <div className={styles.main}>
-      <h1 className={styles.heading}>Attempts by {user.displayName}</h1>
+            <span onClick={() => {router.back();}} className={styles.back}> Back </span>
+      <h1 className={styles.heading}>Attempts by {userData?.displayName}</h1>
       
       <div className={styles.players}>
         {Attempts.map((attempt, index) => {

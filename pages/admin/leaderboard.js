@@ -39,7 +39,7 @@ const Leaderboard = () => {
       <div className={styles.players}>
         {players.map((player, index) => {
           return (
-            <div title="click to view more" id={player.uid} className={styles.player} key={index} onClick = { (e)=>{router.push('/admin/users/attempt/'+e.target.id)}} >
+            <div title="click to view more" className={styles.player} key={index} >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 className={styles.playerImg}
@@ -50,6 +50,7 @@ const Leaderboard = () => {
                   {index+1 + " - " +player.displayName}
               </span>
               <span className={styles.playerPts}>{player.points} pts - {player.level} Level</span>
+              <a href={'/admin/users/attempt/' + player.uid} className={styles.playerPts}>View Logs</a>
             </div>
           );
         })}

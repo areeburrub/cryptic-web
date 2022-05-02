@@ -17,7 +17,7 @@ const Home = () => {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container}  style={{ background: `linear-gradient(#00000053,#0000008b) , url("/main-bg.gif")  no-repeat center center `, backgroundSize:"cover" }}>
       <Head>
         <title>Cryptic Hunt Website - Home</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -25,7 +25,7 @@ const Home = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main} style={{ background: `linear-gradient(#00000053,#0000008b) , url("/main-bg.gif")  no-repeat center center `, backgroundSize:"cover" }}>
+      <main className={styles.main}>
         <div className={styles.content}>
           <h1 className={styles.title}>
             Cryptic Hunt

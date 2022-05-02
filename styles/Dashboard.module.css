@@ -211,6 +211,18 @@
     margin: 0 10px;
 }
 
+.QuestionBox .details .Bonus{
+    background: #ff1515;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 50px;
+    font-family: Roboto;
+    font-size: 2ch;
+    font-weight: bold;
+    margin: 0 10px;
+    text-transform: uppercase;
+}
+
 .QuestionBox .terminal{
     display: flex;
     flex-direction: column;

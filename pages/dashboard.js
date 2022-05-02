@@ -208,6 +208,16 @@ const querySnapshot = await getDocs(qU);
           >
             <div className={styles.details}>
               <span className={styles.level}>Level {userData.level}</span>
+              {isBon && <motion.span className={styles.Bonus}
+                animate = {
+                  {
+                    scale: [1, 1.2, 1],
+                  }
+                }
+                transition = {{
+                  duration: 1,repeat: Infinity,ease: "easeInOut"
+                }}
+              >Bonus Level</motion.span>}
               <span className={styles.value}>{Point} pts</span>
             </div>
             <div className={styles.question}>

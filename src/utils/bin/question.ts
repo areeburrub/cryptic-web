@@ -9,13 +9,14 @@ const question = async (args: string[]): Promise<string> => {
           use skip command
      ` : '';
      const file = data.files==""? "":`
-attached files : <a target="__blank" href="${data.files}"><u>Click Download</u></a>`;
-     return `
-Level is: ${data.level}
+
+attached links : <a target="__blank" href="${data.files}"><u>Click Here</u></a>`;
+     const question = data.question == "" ? "":`
 Question is :
 ${data.question}
-${file}
-${bonus}
+     `
+     return `
+Level is: ${data.level} ${question} ${file} ${bonus}
 `
 };
 
