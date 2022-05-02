@@ -10,21 +10,27 @@
   padding: 5vh 0;
 }
 
-@media (max-width: 768px) {
-  .main{
-    flex-direction: column-reverse;
-    padding: 0;
-    
-  }
-}
-
 .main .content{
   width: 90vw;
   max-width:500px;
   color: #fff;
   background: #1e070786;
   padding: 20px;
-  margin: 5vh auto;
+}
+
+@media (max-width: 768px) {
+  .main{
+    flex-direction: column-reverse;
+    
+  }
+  .main .content{
+    width: 90vw;
+    max-width:500px;
+    color: #fff;
+    background: #1e070786;
+    padding: 20px;
+    margin: 0 auto;
+  }
 }
 
 .main .content .title{
