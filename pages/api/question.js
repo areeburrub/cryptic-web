@@ -11,14 +11,12 @@ import {
 
  const handler = async (req, res) => {
 
-  console.log (req)
   const docRef = doc(db, "Users", req.query.uid);
   const docSnap = await getDoc(docRef);
   const userData = docSnap.data();
 
   const q = query(collection(db, "Questions"), where("level", "==", userData.level));
   const querySnapshot = await getDocs(q);
-  console.log(querySnapshot);
   const data = [];
   querySnapshot.forEach((doc) => {
     data.push(doc.data());

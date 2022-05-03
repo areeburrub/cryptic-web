@@ -10,11 +10,6 @@ export function withPublic(Component) {
     const useauth = useUserContext();
     const router = useRouter();
     useEffect(() => {
-      //   console.log("route",useauth.user);
-      //   if(useauth.user){
-      //       router.replace("/dashboard");
-      //       return <div className="loading1"></div>;
-      //   }
     }, []);
     return <Component useauth={useauth} {...props} />;
   };

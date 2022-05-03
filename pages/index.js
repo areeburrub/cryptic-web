@@ -30,20 +30,28 @@ const Home = () => {
           <h1 className={styles.title}>
             Cryptic Hunt
           </h1>
-          <p className={styles.description}>
-            A website for the Cryptic Hunt game.
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-            In cum ad at molestiae sunt excepturi praesentium,
-            vitae eos vero quas voluptatum cupiditate fuga error velit!
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Ad ab ullam ipsam nulla illum quam quod consequatur consectetur vitae.
-            Debitis minima fugiat maxime voluptates ad quae est laudantium quam tempora
-            perspiciatis magnam corrupti ducimus, officiis veniam sint similique inventore rerum neque nostrum,
-            unde impedit? Eos, quae illum illo provident laboriosam maiores impedit dolore?
-            Nemo architecto natus deleniti voluptatibus alias a, soluta labore minus nulla
-            reprehenderit deserunt debitis sapiente exercitationem! Ab ipsa, numquam sapiente
-            placeat itaque ea maxime magnam. Similique cum minus est eligendi deleniti provident
-            id quos praesentium ex pariatur. Pariatur deserunt molestiae velit sint sed nobis illo dicta nihil?
+          <p className={styles.description}>            
+            
+            Rules & Guidelines:<br/>
+            1. Only lowercase letters should be used<br/>
+            2. use PCs, laptops, etc for better experience<br/>
+            <br/>
+            <br/>
+            All the very best Guys!!!
+            <br/>
+            <br/>
+            Date : 6 th - 7 th May 2022
+            <br/>
+            <br/>
+
+            Event Registration Fees:<br/>
+            ₹150 for team(up to 4 members)<br/>
+            ₹ 60for individual
+            <br/>
+            <br/>
+
+            Registration Link : <a href="https://docs.google.com/forms/d/e/1FAIpQLScIs7qTLrEfJEi-MhSoanHwFu1HtTf4h-Zr6hFvqMuVhJclVw/viewform?usp=sf_link" target="__blank">click here</a>
+          
           </p>
         </div>
 

@@ -81,7 +81,6 @@ const querySnapshot = await getDocs(qU);
         Bondata.push(doc.data());
       });
       setIsBon(Bondata[0].bonus);
-      console.log(userData.level, Bondata[0].bonus)
 }
 
   useEffect(()=>{
@@ -138,7 +137,6 @@ const querySnapshot = await getDocs(qU);
           Bondata.push(doc.data());
         });
         setIsBon(Bondata[0].bonus);
-        console.log(userData.level,Bondata[0].bonus)
       });
 
     const q = query(collection(db, "Users"), orderBy("points", "desc"));

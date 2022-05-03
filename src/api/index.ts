@@ -22,7 +22,6 @@ export const getQuestion = async () =>{
   
   const q = query(collection(db, "Questions"), where("level", "==", userData.level));
   const querySnapshot = await getDocs(q);
-  console.log(querySnapshot);
   const data = [];
   querySnapshot.forEach((doc) => {
     data.push(doc.data());
@@ -43,7 +42,6 @@ export const checkAnswer = async (args: string[]) =>{
   
   const q = query(collection(db, "Questions"), where("level", "==", userData.level));
   const querySnapshot = await getDocs(q);
-  console.log(querySnapshot);
   const data = [];
   querySnapshot.forEach((doc) => {
     data.push(doc.data());
@@ -66,7 +64,6 @@ export const checkAnswer = async (args: string[]) =>{
 export const NumberOfQuestion = async (args: string[]) =>{
   const q = query(collection(db, "Questions"));
   const querySnapshot = await getDocs(q);
-  console.log(querySnapshot);
   const data = [];
   querySnapshot.forEach((doc) => {
     data.push(doc.data());
