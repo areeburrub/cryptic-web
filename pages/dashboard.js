@@ -15,6 +15,7 @@ import {
 } from "firebase/firestore";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { db } from "../src/firebase";
+import { toast } from "react-toastify";
 
 import { Input } from "../src/components/input/Input.tsx";
 import { History } from "../src/components/history/History.tsx";
@@ -156,6 +157,15 @@ const querySnapshot = await getDocs(qU);
         d5.push(doc.data());
       });
       setPoint(d5[0].pts);
+    });
+
+    const q2 = query(collection(db, "Controls"));
+    const unsubscribe2 = onSnapshot(q2, (querySnapshot) => {
+      const data = [];
+      querySnapshot.forEach((doc) => {
+        data.push(doc.data());
+      });
+      data[0].isChecked ? toast.success(`Cryptic Hunt Started and will end on 7th May 2022 at 11:59PM`, { toastId: "unique" }) : toast.error(`Cryptic Hunt ended no answers will recored from now`, { toastId: "uniqueID" });
     });
   }, []);
 

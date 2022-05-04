@@ -1,6 +1,6 @@
 import { checkAnswer, getQuestion, NumberOfQuestion } from './../../api/index.ts';
 import {db, auth} from "../../firebase"
-import { doc, getDoc, updateDoc, increment } from "firebase/firestore";
+import { doc, getDoc, updateDoc, increment,query,collection,getDocs } from "firebase/firestore";
 
 
 const question = async (args: string[]): Promise<string> => {
@@ -9,6 +9,25 @@ const question = async (args: string[]): Promise<string> => {
      const docRef = doc(db, "Users", user.uid);
      const docSnap = await getDoc(docRef);
      const userData = docSnap.data();
+
+    const q2 = query(collection(db, "Controls"));
+    const querySnapshot = await getDocs(q2);
+    const accepting = [];
+    querySnapshot.forEach((doc) => {
+      accepting.push(doc.data());
+    });
+
+
+
+
+
+     if(!accepting[0].isChecked){
+      
+          return `
+We are no more accepting answers.
+Wait for results to be released
+          `
+     }
 
      if(userData.level == await NumberOfQuestion()){
       

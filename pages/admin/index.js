@@ -20,6 +20,9 @@ const Admin = () => {
         <span onClick={()=>{router.push('/admin/leaderboard')}}>
           Leaderboard
         </span>
+        <span onClick={()=>{router.push('/admin/controls')}}>
+          Admin Controls
+        </span>
       </div>
     </div>
   )
