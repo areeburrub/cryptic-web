@@ -1,6 +1,6 @@
 import  { getQuestion, NumberOfQuestion } from "../../api/index.ts";
 import {db, auth} from "../../firebase"
-import { doc, getDoc, updateDoc, increment } from "firebase/firestore";
+import { doc, getDoc, updateDoc, increment,collection,where,query,getDocs } from "firebase/firestore";
 
 const hint = async (args: string[]): Promise<string> => {
   
@@ -10,7 +10,11 @@ const hint = async (args: string[]): Promise<string> => {
   const docSnap = await getDoc(docRef);
   const userData = docSnap.data();
 
-  
+  if(data.bonus){
+    return `
+no hint for bonus level
+    `
+  }
      if(userData.level == await NumberOfQuestion()){
       
           return `
