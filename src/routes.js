@@ -53,7 +53,7 @@ export function AdminProtected(Component) {
     const useauth = useUserContext();
     const router = useRouter();
 
-    if (!useauth.user.admin) {
+    if (!useauth.user?.admin) {
       toast.info("You don't have Admin Access", { toastId: "unique" });
       router.replace("/");
       return <div className="loading1"></div>;

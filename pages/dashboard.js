@@ -215,7 +215,7 @@ const querySnapshot = await getDocs(qU);
           transition={{ duration: 1 }}
           >
             <div className={styles.details}>
-              <span className={styles.level}>Level {userData.level}</span>
+              <span className={styles.level}  title= {'You are at Level ' + userData.level} >Level {userData.level}</span>
               {isBon && <motion.span className={styles.Bonus}
                 animate = {
                   {
@@ -226,7 +226,7 @@ const querySnapshot = await getDocs(qU);
                   duration: 1,repeat: Infinity,ease: "easeInOut"
                 }}
               >Bonus Level</motion.span>}
-              <span className={styles.value}>{Point} pts</span>
+              <span className={styles.value} title= {'This question will give you ' + Point + 'points'} >{Point} pts</span>
             </div>
             <div className={styles.question}>
               <div
@@ -252,7 +252,7 @@ const querySnapshot = await getDocs(qU);
             </div>
           </motion.div>
 
-          <div className={styles.leaderboard}>
+          <div className={styles.leaderboard} >
             <h2>Leaderboard</h2>
 
             <div className={styles.players}>

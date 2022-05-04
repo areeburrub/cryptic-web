@@ -13,13 +13,15 @@ import {
   orderBy,
   onSnapshot,
   deleteDoc,
-  where
+  where,
+  getDocs
 } from "firebase/firestore";
 import { useRouter } from "next/router";
 
 
 const Admin = () => {
   const router = useRouter();
+  const [players, setPlayers] = useState([]);
 
   const [controls, setControls] = useState({
     isChecked:false,
@@ -34,15 +36,18 @@ const Admin = () => {
       });
       setEmailList(data);
     });
-    const q2 = query(collection(db, "Controls"));
+    const q2 = query(doc(db, "Controls", "AdminControlCrytic"));
     const unsubscribe2 = onSnapshot(q2, (querySnapshot) => {
-      const data = [];
-      querySnapshot.forEach((doc) => {
-        data.push(doc.data());
-      });
-      setControls(data[0]);
+      setControls(querySnapshot.data());
+    });
+
+    const q3 = query(doc(db, "Controls", "Leaderboard"));
+    const unsubscribe3 = onSnapshot(q3, (querySnapshot) => {
+      setPlayers(querySnapshot.data().Leaderboard);
     });
   }, []);
+
+
 
   const ChangeControl = (checked) => {
 
@@ -53,6 +58,26 @@ const Admin = () => {
     setDoc(docRef, control);
 
   }
+
+  const saveLeaderboard = async() =>{
+
+    if(window.confirm(`are you sure you want to save as this will remove last saved leadeboarf?`)){
+
+        const q = query(collection(db, "Users"), orderBy("points", "desc"));
+        const querySnapshot = await getDocs(q);
+      const data = [];
+      querySnapshot.forEach((doc) => {
+        data.push(doc.data());
+      });
+      const docRef = doc(db, "Controls", "Leaderboard");
+      const control = {
+        Leaderboard: data
+              }
+      setDoc(docRef, control);
+      toast.success("Saved Leaderboard");
+    }
+  }
+
 
   const _handleChange = (e) => {
     const { checked } = e.target;
@@ -92,9 +117,43 @@ const Admin = () => {
                 </div>
             </label>
         </div>
+      </div>
+      <div className={styles.control}>
 
+        <div className={styles.text}>
+          Save Leaderboard
+        </div>
+        <div className="switch-container">
+            <label>
+                <input type="button" value="save" className={styles.save} onClick={()=>{saveLeaderboard()}}/>
+                <div>
+          
+                    <div></div>
+                </div>
+            </label>
+        </div>
       </div>
 
+      <h1 className={styles.heading}>Last Saved Leaderboard</h1>
+      <div className={styles.players}>
+        {players.map((player, index) => {
+          return (
+            <div title="click to view more" className={styles.player} key={index} >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                className={styles.playerImg}
+                src={player.photo}
+                alt={player.displayName}
+              />
+              <span className={styles.playerName}>
+                  {index+1 + " - " +player.displayName}
+              </span>
+              <span className={styles.playerPts}>{player.points} pts - {player.level} Level</span>
+              <a href={'/admin/users/attempt/' + player.uid} className={styles.playerPts}>View Logs</a>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };

@@ -31,10 +31,14 @@ const Leaderboard = () => {
       });
       setPlayers(data);
     });
+    
   }, []);
   return (
     <div className={styles.main}>
       <h1 className={styles.heading}>Leaderboard</h1>
+      <span className={styles.copyToClipboardBtn} onClick={() => {navigator.clipboard.writeText(JSON.stringify(players))}}>
+        Copy Leaderboard as JSON to clipboard
+      </span>
       
       <div className={styles.players}>
         {players.map((player, index) => {
