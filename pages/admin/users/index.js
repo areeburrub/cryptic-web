@@ -88,10 +88,6 @@ const Admin = () => {
         Back
       </span>
       <h1 className={styles.heading}>Manage Users</h1>
-      <form className={styles.AddEmail} onSubmit={(e)=>{handleFormSubmit(e)}}>
-        <input type="email" name="email" value={EmailInput} placeholder="Enter Email to Add" onChange={(e)=>{setEmailInput(e.target.value)}}/>
-        <button type="submit">Add</button>
-      </form>
       <div className={styles.userList}>
 
         {EmailList.map(email => (
