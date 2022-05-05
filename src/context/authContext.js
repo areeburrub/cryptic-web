@@ -81,6 +81,7 @@ export const UserContextProvider = (props) => {
         const docSnap = await getDoc(docRef);
         const tid = await getTeamId(user.email)
         const userProfile = {
+                admin : docSnap.data().admin || false,
                 displayName : user.displayName,
                 uid : user.uid,
                 email : user.email,
