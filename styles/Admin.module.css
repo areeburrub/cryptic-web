@@ -496,3 +496,226 @@ input[type=checkbox].switch:checked + div > div {
   font-family:ubuntu;
   cursor:pointer;
 }
+
+/* Teams */
+.AddModal .modalClose{
+  position:absolute;
+  top:5px;
+  right:10px;
+  color:#000;
+  text-align: center;
+  font-size: 2.5ch;
+  text-transform: uppercase;
+  transition:.2s all;
+}
+
+.AddModal .modalClose:hover{
+  color:#ff0000;
+  transform:rotate(90deg);
+}
+
+.AddModalContatiner{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  width:fit-content;
+  height:fit-content;
+  position:absolute;
+  top:60%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  z-index:10;
+  transition:all 0.3s ease-in-out;
+  padding-bottom: 20vh;
+}
+
+.AddModal{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  width:fit-content;
+  height:fit-content;
+  background:#fff;
+  padding: 20px;
+  border-radius:10px;
+  box-shadow:0px 0px 30px -5px rgba(0, 0, 0, 0.809);
+}
+/* .AddModal:after{
+  content:' ';
+  height:10vh;
+  widht:30vw;
+
+} */
+
+.AddModal .AddModalBody{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  width:fit-content;
+  height:fit-content;
+  padding: 20px;
+  border-radius:20px;
+  background:#fff;
+  box-shadow:0px 0px 20px -10px rgba(0,0,0,0.5);
+  font-size: 2.5ch;
+}
+
+.AddModal .AddModalBody .TeamID{
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  justify-content:center;
+  width:fit-content;
+  height:fit-content;
+  padding: 5px;
+  margin: 10px;
+  border-radius:5px;
+  background:#7bb0ff;
+  box-shadow:0px 0px 20px -10px rgba(0,0,0,0.5);
+  font-size: 2ch;
+  font-family:ubuntu;
+
+}
+.AddModal .AddModalBody input{
+  width:fit-content;
+  height:fit-content;
+  padding: 5px;
+  margin: 10px;
+  border-radius:5px;
+  box-shadow:0px 0px 20px -10px rgba(0,0,0,0.5);
+  font-size: 1.5ch;
+  font-family:ubuntu;
+}
+.AddModal .AddModalBody button{
+  width:fit-content;
+  height:fit-content;
+  padding: 5px;
+  margin: 10px;
+  border-radius:5px;
+  box-shadow:0px 0px 20px -10px rgba(0,0,0,0.5);
+  font-size: 1.5ch;
+  font-family:ubuntu;
+  cursor:pointer;
+}
+
+.AddModal .AddModalBody .ViewMemberEmails{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  width:fit-content;
+  height:fit-content;
+  padding: 5px 20px;
+  margin: 10px;
+  border-radius:5px;
+  background:#7bb0ff;
+  box-shadow:0px 0px 20px -10px rgba(0,0,0,0.5);
+  font-size: 1.5ch;
+  font-family:ubuntu;
+}
+.AddModal .AddModalBody .ViewMemberEmails .MemberEmails{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  width:fit-content;
+  height:fit-content;
+  padding: 2px 20px;
+  margin: 10px;
+  border-radius:5px;
+  background:#7bb0ff;
+  box-shadow:0px 0px 20px -10px rgba(0,0,0,0.5);
+  font-size: 1.5ch;
+  font-family:ubuntu;
+}
+
+.TeamContainer{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  width:fit-content;
+  max-width: 90vw;
+  height:fit-content;
+  padding: 10px 1vw;
+  border-radius:20px;
+  margin: 0 auto;
+}
+
+.TeamContainer .Team{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  width:fit-content;
+  height:fit-content;
+  padding: 1vh 1vw;
+  border-radius:20px;
+  background:#fff;
+  box-shadow:0px 0px 20px -10px rgba(0,0,0,0.5);
+  font-size: 2ch;
+  margin: 10px auto;
+}
+.TeamContainer .Team .TeamName{
+  font-size: 2.5ch;
+  font-weight:bold;
+  }
+
+.TeamContainer .Team .TeamMemberEmails{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  width:fit-content;
+  height:fit-content;
+  padding: 1vh 1vw;
+  border-radius:20px;
+  background:#fff;
+  box-shadow:0px 0px 20px -10px rgba(0,0,0,0.5);
+  font-size: 2ch;
+  margin: 0px auto;
+}
+
+.TeamContainer .Team .TeamMemberEmails .TeamMemberEmailsList{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  width:fit-content;
+  height:fit-content;
+  padding: 1vh 2vw;
+  border-radius:20px;
+  background:#fff;
+  box-shadow:0px 0px 20px -10px rgba(0,0,0,0.5);
+  font-size: 2ch;
+  margin: 0 auto;
+}
+  .TeamContainer .Team .TeamMemberEmails .TeamMemberEmailsList .Emails{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    width:fit-content;
+    height:fit-content;
+    padding: 1vh 2vw;
+    border-radius:20px;
+    background:#5362ff;
+    color:#fff;
+    box-shadow:0px 0px 20px -10px rgba(0,0,0,0.5);
+    font-size: 2ch;
+    margin: 5px auto;
+  }
+.TeamContainer .Team button{
+  width:fit-content;
+  height:fit-content;
+  padding: 5px;
+  margin: 10px;
+  border-radius:5px;
+  box-shadow:0px 0px 20px -10px rgba(0,0,0,0.5);
+  font-size: 2.5ch;
+  font-family:ubuntu;
+  cursor:pointer;
+}

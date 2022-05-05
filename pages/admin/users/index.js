@@ -20,22 +20,23 @@ import { useRouter } from "next/router";
 const Admin = () => {
   const router = useRouter();
 
-  const [EmailInput, setEmailInput] = useState("")
-  const [EmailList, setEmailList] = useState([])
-
+  
   //  Make ID function, I use this to create random ID
   // credit : https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript
   const makeid = (length) => {
-  var result = '';
-  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  var charactersLength = characters.length;
-  for ( var i = 0; i < length; i++ ) {
-  result += characters.charAt(Math.floor(Math.random() * 
-  charactersLength));
+    var result = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * 
+      charactersLength));
+    }
+    return result;
   }
-  return result;
-  }
-
+  
+  const [EmailInput, setEmailInput] = useState("")
+  
+  const [EmailList, setEmailList] = useState([])
   useEffect(() => {
     const q = query(collection(db, "Email"), orderBy("email"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {

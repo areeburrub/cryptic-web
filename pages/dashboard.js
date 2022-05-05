@@ -31,7 +31,7 @@ const Home = () => {
   const ElevenPop =  useAnimation();
 
   const router = useRouter();
-  const { user } = useUserContext();
+  const { user, TeamData, setTeamData } = useUserContext();
   const username = user.displayName.replace(/\s/g, "").toLowerCase();
   const [userData, setuserData] = useState(user);
   const [players, setPlayers] = useState([]);
@@ -68,14 +68,9 @@ const Home = () => {
 
   const [Point, setPoint] = useState(0);
   
-  const getPts = async () =>{
-  const docRef = doc(db, "Users", user.uid);
-  const docSnap = await getDoc(docRef);
-  const userData = docSnap.data();
-  }
 
 const UpdateBonusState = async() =>{
-const qU = query(collection(db, "Questions"), where("level", "==", userData.level));
+const qU = query(collection(db, "Questions"), where("level", "==", TeamData.level));
 const querySnapshot = await getDocs(qU);
       const Bondata = [];
       querySnapshot.forEach((doc) => {
@@ -85,12 +80,11 @@ const querySnapshot = await getDocs(qU);
 }
 
   useEffect(()=>{
-    getPts();
     PointsBounce.start({
       y: ["0px", "-30px", "20px", "0px"]
     });
     UpdateBonusState();
-  }, [userData])
+  }, [TeamData])
 
   const [inputRef, setInputFocus] = useFocus();
 
@@ -131,7 +125,7 @@ const querySnapshot = await getDocs(qU);
       setuserData(doc.data());
     });
 
-    const qU = query(collection(db, "Questions"), where("level", "==", userData.level));
+    const qU = query(collection(db, "Questions"), where("level", "==", TeamData.level));
     const unsubs = onSnapshot(qU, (querySnapshot) => {
         const Bondata = [];
         querySnapshot.forEach((doc) => {
@@ -140,7 +134,7 @@ const querySnapshot = await getDocs(qU);
         setIsBon(Bondata[0].bonus);
       });
 
-    const q = query(collection(db, "Users"), orderBy("points", "desc"));
+    const q = query(collection(db, "Teams"), orderBy("points", "desc"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const data = [];
       querySnapshot.forEach((doc) => {
@@ -149,8 +143,9 @@ const querySnapshot = await getDocs(qU);
       setPlayers(data);
     });
 
+    
     //update score
-    const q4 = query(collection(db, "Questions"), where("level", "==", userData.level));
+    const q4 = query(collection(db, "Questions"), where("level", "==", TeamData.level));
      const unsub4 = onSnapshot(q4, (querySnapshot) => {
       const d5 = [];
       querySnapshot.forEach((doc) => {
@@ -167,6 +162,12 @@ const querySnapshot = await getDocs(qU);
       });
       data[0].isChecked ? toast.success(`Cryptic Hunt Started and will end on 7th May 2022 at 11:59PM`, { toastId: "unique" }) : toast.error(`Cryptic Hunt ended no answers will recored from now`, { toastId: "uniqueID" });
     });
+
+    const q99 = query(doc(db, "Teams",user.tid));
+    const unsubscribe99 = onSnapshot(q99, (querySnapshot) => {
+      setTeamData(querySnapshot.data());
+    }); 
+
   }, []);
 
 
@@ -205,7 +206,7 @@ const querySnapshot = await getDocs(qU);
         <div className={styles.user}>
           <img src={user.photo} alt={user.displayName} />
           <span className={styles.username}>{user.displayName}</span>
-          <span className={styles.points}>{null ?? userData.points}pts</span>
+          <span className={styles.points}>{TeamData.points}pts</span>
         </div>
 
         <motion.div className={styles.mainArea}>
@@ -215,7 +216,7 @@ const querySnapshot = await getDocs(qU);
           transition={{ duration: 1 }}
           >
             <div className={styles.details}>
-              <span className={styles.level}  title= {'You are at Level ' + userData.level} >Level {userData.level}</span>
+              <span className={styles.level}  title= {'You are at Level ' + TeamData.level} >Level {TeamData.level}</span>
               {isBon && <motion.span className={styles.Bonus}
                 animate = {
                   {
@@ -262,11 +263,11 @@ const querySnapshot = await getDocs(qU);
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       className={styles.playerImg}
-                      src={player.photo}
-                      alt={player.displayName}
+                      src={"https://ui-avatars.com/api/?background=random&name="+player.name}
+                      alt={player.name}
                     />
                     <span className={styles.playerName}>
-                      {player.displayName}
+                      {player.name}
                     </span>
                     <span className={styles.playerPts}>{player.points}pts</span>
                   </div>

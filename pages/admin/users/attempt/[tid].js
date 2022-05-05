@@ -21,20 +21,20 @@ import { useUserContext } from "../../../../src/context/authContext";
 
 const Leaderboard = () => {
   const router = useRouter()
-  const { uid } = router.query
+  const { tid } = router.query
 
   const [Attempts, setAttempts] = useState([]);
-  const [userData, setuserData] = useState(null);
+  const [TeamData, setTeamData] = useState(null);
   
 
 const getUser = async() =>{
-  const docRef = doc(db, "Users", uid);
+  const docRef = doc(db, "Teams", tid);
   const docSnap = await getDoc(docRef);
   const Data = docSnap.data();
-  setuserData(Data);
+  setTeamData(Data);
 }
   useEffect(() => {
-    const q = query(collection(db, "Attempts"), where("uid", "==", uid), orderBy("time","desc"));
+    const q = query(collection(db, "Attempts"), where("tid", "==", tid), orderBy("time","desc"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const data = [];
       querySnapshot.forEach((doc) => {
@@ -49,13 +49,15 @@ const getUser = async() =>{
   return (
     <div className={styles.main}>
             <span onClick={() => {router.back();}} className={styles.back}> Back </span>
-      <h1 className={styles.heading}>Attempts by {userData?.displayName}</h1>
+      <h1 className={styles.heading}>Attempts by {TeamData?.name}</h1>
       
       <div className={styles.players}>
         {Attempts.map((attempt, index) => {
           return (
             <div className={styles.attempt} key={index}>
               <div className={styles.attemptDetail}>
+                <span className={styles.attemptLevel}>Answer by: {attempt.byName}</span>
+                <span className={styles.attemptLevel}>Email: {attempt.byEmail}</span>
                 <span className={styles.attemptLevel}>Level {attempt.level}</span>
                 <span className={styles.attemptHint}>{attempt.hint?"Hint Used":"Hint Not Used"}</span>
                 <span className={styles.attemptCheck}>{attempt.check ? "correct" : "incorrect"}</span>
