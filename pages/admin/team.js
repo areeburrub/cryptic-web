@@ -35,7 +35,7 @@ function Team() {
   }
 
   //  State
-  const [ModalOpen, setModalOpen] = useState(true)
+  const [ModalOpen, setModalOpen] = useState(false)
   const [TeamModalData, setTeamModalData] = useState({
     tid:makeid(6),
     teamName: ""
