@@ -22,6 +22,7 @@ import {
 // const unique = [...new Map(emails.map((item) => [item["tid"], item])).values()];
 
 export const getTeamId = async (email) => {
+<<<<<<< HEAD
 
   // const q = query(collection(db, "Email"), orderBy("email"));
   // const querySnapshot = await getDocs(q);
@@ -34,6 +35,14 @@ export const getTeamId = async (email) => {
   const docSnap = await getDoc(docRef);
   const emails = docSnap.data().Emails;
 
+=======
+  const q = query(collection(db, "Email"), orderBy("email"));
+  const querySnapshot = await getDocs(q);
+  const emails = []
+  querySnapshot.forEach((doc) => {
+    emails.push(doc.data());
+  });
+>>>>>>> 0c1579952845cb4bd34230d33eeb03718b2b0db8
   const teamId = emails.filter((item) => item["email"] == email);
   const output = teamId.length == 0 ? "":teamId[0]["tid"];
   return output;
@@ -47,6 +56,7 @@ export const getTeamData = async (teamId) => {
     return docSnap.data();
   }
   else{
+<<<<<<< HEAD
     // const q = query(collection(db, "Email"), where("tid", "==", teamId));
     // const querySnapshot = await getDocs(q);
     // const team = [];
@@ -61,6 +71,17 @@ export const getTeamData = async (teamId) => {
     const teamData =  {
         tid: teamId,
         name: team[0]["teamName"],
+=======
+    const q = query(collection(db, "Email"), where("tid", "==", teamId));
+    const querySnapshot = await getDocs(q);
+    const emails = []
+    querySnapshot.forEach((doc) => {
+      emails.push(doc.data());
+    });
+    const teamData =  {
+        tid: teamId,
+        name: emails[0]["teamName"],
+>>>>>>> 0c1579952845cb4bd34230d33eeb03718b2b0db8
         points: 0,
         level: 1,
         hint : false

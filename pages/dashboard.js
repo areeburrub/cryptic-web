@@ -142,7 +142,10 @@ const Home = () => {
       data[0].isChecked ? toast.success(`Cryptic Hunt accepting Answers`, { toastId: "unique" }) : toast.error(`Cryptic Hunt not accepting Answers `, { toastId: "uniqueID" });
     });
 
+<<<<<<< HEAD
     getTeamData(user.tid);
+=======
+>>>>>>> 0c1579952845cb4bd34230d33eeb03718b2b0db8
   }, []);
 
 

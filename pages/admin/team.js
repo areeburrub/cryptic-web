@@ -93,7 +93,10 @@ function Team() {
       const docRef = doc(db, "Email", eid);
       setDoc(docRef, data);
     }
+<<<<<<< HEAD
     
+=======
+>>>>>>> 0c1579952845cb4bd34230d33eeb03718b2b0db8
     setEmailInput("");
   }
 
