@@ -45,7 +45,13 @@ const Admin = () => {
         data.push(doc.data());
       });
       setEmailList(data);
+      const docRef = doc(db, "Controls", "Emails");
+      const email = {
+        Emails: data,
+      };
+      setDoc(docRef, email);
     });
+
   }, []);
 
   const handleFormSubmit = (e) => {
