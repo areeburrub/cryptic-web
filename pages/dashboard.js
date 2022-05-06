@@ -131,7 +131,6 @@ const Home = () => {
       });
       setPoint(d5[0].pts);
       setIsBon(d5[0].bonus);
-
     });
 
     const q2 = query(collection(db, "Controls"));

@@ -22,20 +22,23 @@ export function withProtected(Component) {
 
     const [EmailExist, setEmailExist] = useState(true);
 
-    useEffect(() => {
+    const emailUpadate = async () =>{
       const q = query(collection(db, "Email"), orderBy("email"));
-      const unsubscribe = onSnapshot(q, (querySnapshot) => {
-        const data = [];
-        querySnapshot.forEach((doc) => {
-          data.push(doc.data());
-        });
-        if (data.find(emailList => emailList.email == useauth.user?.email)){
-          setEmailExist(true);
-        }
-        else{
-          setEmailExist(false);
-        }
+      const querySnapshot = await getDocs(q);
+      const data = [];
+      querySnapshot.forEach((doc) => {
+        data.push(doc.data());
       });
+      if (data.find(emailList => emailList.email == useauth.user?.email)){
+        setEmailExist(true);
+      }
+      else{
+        setEmailExist(false);
+      }
+    }
+
+    useEffect(() => {
+      emailUpadate();
     }, []);
 
 
