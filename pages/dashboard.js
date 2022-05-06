@@ -22,7 +22,7 @@ import { History } from "../src/components/history/History.tsx";
 import { useHistory } from "../src/hooks/history.ts";
 import { banner } from "../src/utils/bin/utils.ts";
 import { motion, useAnimation } from "framer-motion"
-
+import { getTeamData } from "../src/api/index"
 const Home = () => {
 
 
@@ -31,9 +31,8 @@ const Home = () => {
   const ElevenPop =  useAnimation();
 
   const router = useRouter();
-  const { user } = useUserContext();
+  const { user, TeamData, setTeamData } = useUserContext();
   const username = user.displayName.replace(/\s/g, "").toLowerCase();
-  const [userData, setuserData] = useState(user);
   const [players, setPlayers] = useState([]);
 
   const [output, setOutput] = useState([]);
@@ -68,29 +67,12 @@ const Home = () => {
 
   const [Point, setPoint] = useState(0);
   
-  const getPts = async () =>{
-  const docRef = doc(db, "Users", user.uid);
-  const docSnap = await getDoc(docRef);
-  const userData = docSnap.data();
-  }
-
-const UpdateBonusState = async() =>{
-const qU = query(collection(db, "Questions"), where("level", "==", userData.level));
-const querySnapshot = await getDocs(qU);
-      const Bondata = [];
-      querySnapshot.forEach((doc) => {
-        Bondata.push(doc.data());
-      });
-      setIsBon(Bondata[0].bonus);
-}
 
   useEffect(()=>{
-    getPts();
     PointsBounce.start({
       y: ["0px", "-30px", "20px", "0px"]
     });
-    UpdateBonusState();
-  }, [userData])
+  }, [TeamData])
 
   const [inputRef, setInputFocus] = useFocus();
 
@@ -127,36 +109,28 @@ const querySnapshot = await getDocs(qU);
   
 
   useEffect(() => {
-    const unsub = onSnapshot(doc(db, "Users", user.uid), (doc) => {
-      setuserData(doc.data());
-    });
 
-    const qU = query(collection(db, "Questions"), where("level", "==", userData.level));
-    const unsubs = onSnapshot(qU, (querySnapshot) => {
-        const Bondata = [];
-        querySnapshot.forEach((doc) => {
-          Bondata.push(doc.data());
-        });
-        setIsBon(Bondata[0].bonus);
-      });
-
-    const q = query(collection(db, "Users"), orderBy("points", "desc"));
+    const q = query(collection(db, "Teams"), orderBy("points", "desc"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const data = [];
       querySnapshot.forEach((doc) => {
         data.push(doc.data());
       });
       setPlayers(data);
+      const TeamD = data.find((team) => team.tid == user.tid);
+      setTeamData(TeamD);
     });
 
+    
     //update score
-    const q4 = query(collection(db, "Questions"), where("level", "==", userData.level));
+    const q4 = query(collection(db, "Questions"), where("level", "==", TeamData.level));
      const unsub4 = onSnapshot(q4, (querySnapshot) => {
       const d5 = [];
       querySnapshot.forEach((doc) => {
         d5.push(doc.data());
       });
       setPoint(d5[0].pts);
+      setIsBon(d5[0].bonus);
     });
 
     const q2 = query(collection(db, "Controls"));
@@ -165,8 +139,13 @@ const querySnapshot = await getDocs(qU);
       querySnapshot.forEach((doc) => {
         data.push(doc.data());
       });
-      data[0].isChecked ? toast.success(`Cryptic Hunt Started and will end on 7th May 2022 at 11:59PM`, { toastId: "unique" }) : toast.error(`Cryptic Hunt ended no answers will recored from now`, { toastId: "uniqueID" });
+      data[0].isChecked ? toast.success(`Cryptic Hunt accepting Answers`, { toastId: "unique" }) : toast.error(`Cryptic Hunt not accepting Answers `, { toastId: "uniqueID" });
     });
+
+<<<<<<< HEAD
+    getTeamData(user.tid);
+=======
+>>>>>>> 0c1579952845cb4bd34230d33eeb03718b2b0db8
   }, []);
 
 
@@ -205,7 +184,7 @@ const querySnapshot = await getDocs(qU);
         <div className={styles.user}>
           <img src={user.photo} alt={user.displayName} />
           <span className={styles.username}>{user.displayName}</span>
-          <span className={styles.points}>{null ?? userData.points}pts</span>
+          <span className={styles.points}>{TeamData.points}pts</span>
         </div>
 
         <motion.div className={styles.mainArea}>
@@ -215,7 +194,7 @@ const querySnapshot = await getDocs(qU);
           transition={{ duration: 1 }}
           >
             <div className={styles.details}>
-              <span className={styles.level}  title= {'You are at Level ' + userData.level} >Level {userData.level}</span>
+              <span className={styles.level}  title= {'You are at Level ' + TeamData.level} >Level {TeamData.level}</span>
               {isBon && <motion.span className={styles.Bonus}
                 animate = {
                   {
@@ -262,11 +241,11 @@ const querySnapshot = await getDocs(qU);
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       className={styles.playerImg}
-                      src={player.photo}
-                      alt={player.displayName}
+                      src={"https://ui-avatars.com/api/?background=random&name="+player.name}
+                      alt={player.name}
                     />
                     <span className={styles.playerName}>
-                      {player.displayName}
+                      {player.name}
                     </span>
                     <span className={styles.playerPts}>{player.points}pts</span>
                   </div>

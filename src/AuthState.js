@@ -3,10 +3,22 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useUserContext } from "./context/authContext";
 import { auth, db } from "./firebase";
 
-import { doc, getDoc } from "firebase/firestore";
+import {
+  doc,
+  setDoc,
+  getDocs,
+  getDoc,
+  query,
+  collection,
+  orderBy,
+  onSnapshot,
+  deleteDoc,
+  where,
+} from "firebase/firestore";
+
 
 export default function AuthStateChanged({ children }) {
-  const { setUser } = useUserContext();
+  const { user, setUser, setTeamData } = useUserContext();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -21,6 +33,8 @@ export default function AuthStateChanged({ children }) {
         setLoading(false);
       }
     });
+
+
   }, []);
 
   if (loading) {

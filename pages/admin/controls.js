@@ -21,7 +21,7 @@ import { useRouter } from "next/router";
 
 const Admin = () => {
   const router = useRouter();
-  const [players, setPlayers] = useState([]);
+  const [players, setPlayers] = useState([ ]);
 
   const [controls, setControls] = useState({
     isChecked:false,
@@ -118,6 +118,7 @@ const Admin = () => {
             </label>
         </div>
       </div>
+
       <div className={styles.control}>
 
         <div className={styles.text}>
@@ -133,6 +134,27 @@ const Admin = () => {
             </label>
         </div>
       </div>
+
+{/*       
+      <div className={styles.controlAbout}>
+
+        <div className={styles.text}>
+          Save Leaderboard
+        </div>
+        <form>
+          <textarea></textarea>
+
+          <div className="switch-container">
+            <label>
+                <input type="button" value="save" className={styles.save} onClick={()=>{}}/>
+                <div>
+          
+                    <div></div>
+                </div>
+            </label>
+        </div>
+        </form>
+      </div> */}
 
       <h1 className={styles.heading}>Last Saved Leaderboard</h1>
       <div className={styles.players}>

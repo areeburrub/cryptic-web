@@ -16,11 +16,13 @@ import axios from 'axios';
 export const getQuestion = async () =>{
   
   const user = auth.currentUser;
-  const docRef = doc(db, "Users", user.uid);
+  const docRef1 = doc(db, "Users", user.uid);
+  const docSnap1 = await getDoc(docRef1);
+  const userData = docSnap1.data();
+  const docRef = doc(db, "Teams", userData.tid);
   const docSnap = await getDoc(docRef);
-  const userData = docSnap.data();
   
-  const q = query(collection(db, "Questions"), where("level", "==", userData.level));
+  const q = query(collection(db, "Questions"), where("level", "==", docSnap.data().level));
   const querySnapshot = await getDocs(q);
   const data = [];
   querySnapshot.forEach((doc) => {
@@ -35,12 +37,16 @@ export const getQuestion = async () =>{
 export const checkAnswer = async (args: string[]) =>{
   const answer = args.join(' ');
   const user = auth.currentUser;
-  const docRef = doc(db, "Users", user.uid);
+  const docRef1 = doc(db, "Users", user.uid);
+  const docSnap1 = await getDoc(docRef1);
+  const userData = docSnap1.data();
+  const docRef = doc(db, "Teams", userData.tid);
   const docSnap = await getDoc(docRef);
-  const userData = docSnap.data();
+  const TeamData = docSnap.data()
+  
 
   
-  const q = query(collection(db, "Questions"), where("level", "==", userData.level));
+  const q = query(collection(db, "Questions"), where("level", "==", TeamData.level));
   const querySnapshot = await getDocs(q);
   const data = [];
   querySnapshot.forEach((doc) => {
@@ -51,12 +57,14 @@ export const checkAnswer = async (args: string[]) =>{
   
   //Add Attempt
   const attempt = await addDoc(collection(db, "Attempts"), {
-    uid : userData.uid,
-    level : userData.level,
+    tid : TeamData.tid,
+    byName : userData.displayName,
+    byEmail : userData.email,
+    level : TeamData.level,
     answer : answer,
     time : serverTimestamp(),
     check : output,
-    hint : userData.hint
+    hint : TeamData.hint
   });
   return output;
 }

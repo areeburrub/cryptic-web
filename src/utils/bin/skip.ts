@@ -19,7 +19,10 @@ enter command -> skip confirm
     }
     else if(args[0] == 'confirm'){
       const user = auth.currentUser;
-      const docRef = doc(db, "Users", user.uid);
+  const docRef1 = doc(db, "Users", user.uid);
+  const docSnap1 = await getDoc(docRef1);
+  const userData = docSnap1.data();
+      const docRef = doc(db, "Teams", userData.tid);
       await updateDoc(docRef, {
         level: increment(1),
         hint: false
