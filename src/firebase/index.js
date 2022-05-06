@@ -3,13 +3,13 @@ import { getAuth } from "firebase/auth"
 import { getFirestore } from "firebase/firestore"
 
 const config = {
-  apiKey: "AIzaSyC585XeyX1ZTvg7dR3_RtxPEY4FAF7WMzg",
-  authDomain: "cryptic-22.firebaseapp.com",
-  projectId: "cryptic-22",
-  storageBucket: "cryptic-22.appspot.com",
-  messagingSenderId: "853948601325",
-  appId: "1:853948601325:web:680c0f438515e6227d8de4",
-  measurementId: "G-T7J8S2C6E4"
+  apiKey: "AIzaSyBTFTIUg8Z-C3TZu5_KwLUdx-y1BZ1rK6o",
+  authDomain: "cryptic-hunt-web.firebaseapp.com",
+  projectId: "cryptic-hunt-web",
+  storageBucket: "cryptic-hunt-web.appspot.com",
+  messagingSenderId: "236402709063",
+  appId: "1:236402709063:web:b8d980ec6ddee13c769762",
+  measurementId: "G-0CVVGVXSYV",
 };
 
 

@@ -33,7 +33,6 @@ const Home = () => {
   const router = useRouter();
   const { user, TeamData, setTeamData } = useUserContext();
   const username = user.displayName.replace(/\s/g, "").toLowerCase();
-  const [userData, setuserData] = useState(user);
   const [players, setPlayers] = useState([]);
 
   const [output, setOutput] = useState([]);
@@ -69,21 +68,10 @@ const Home = () => {
   const [Point, setPoint] = useState(0);
   
 
-const UpdateBonusState = async() =>{
-const qU = query(collection(db, "Questions"), where("level", "==", TeamData.level));
-const querySnapshot = await getDocs(qU);
-      const Bondata = [];
-      querySnapshot.forEach((doc) => {
-        Bondata.push(doc.data());
-      });
-      setIsBon(Bondata[0].bonus);
-}
-
   useEffect(()=>{
     PointsBounce.start({
       y: ["0px", "-30px", "20px", "0px"]
     });
-    UpdateBonusState();
   }, [TeamData])
 
   const [inputRef, setInputFocus] = useFocus();
@@ -121,18 +109,6 @@ const querySnapshot = await getDocs(qU);
   
 
   useEffect(() => {
-    const unsub = onSnapshot(doc(db, "Users", user.uid), (doc) => {
-      setuserData(doc.data());
-    });
-
-    const qU = query(collection(db, "Questions"), where("level", "==", TeamData.level));
-    const unsubs = onSnapshot(qU, (querySnapshot) => {
-        const Bondata = [];
-        querySnapshot.forEach((doc) => {
-          Bondata.push(doc.data());
-        });
-        setIsBon(Bondata[0].bonus);
-      });
 
     const q = query(collection(db, "Teams"), orderBy("points", "desc"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -141,6 +117,8 @@ const querySnapshot = await getDocs(qU);
         data.push(doc.data());
       });
       setPlayers(data);
+      const TeamD = data.find((team) => team.tid == user.tid);
+      setTeamData(TeamD);
     });
 
     
@@ -152,6 +130,8 @@ const querySnapshot = await getDocs(qU);
         d5.push(doc.data());
       });
       setPoint(d5[0].pts);
+      setIsBon(d5[0].bonus);
+
     });
 
     const q2 = query(collection(db, "Controls"));
@@ -160,13 +140,8 @@ const querySnapshot = await getDocs(qU);
       querySnapshot.forEach((doc) => {
         data.push(doc.data());
       });
-      data[0].isChecked ? toast.success(`Cryptic Hunt Started and will end on 7th May 2022 at 11:59PM`, { toastId: "unique" }) : toast.error(`Cryptic Hunt ended no answers will recored from now`, { toastId: "uniqueID" });
+      data[0].isChecked ? toast.success(`Cryptic Hunt accepting Answers`, { toastId: "unique" }) : toast.error(`Cryptic Hunt not accepting Answers `, { toastId: "uniqueID" });
     });
-
-    const q99 = query(doc(db, "Teams",user.tid));
-    const unsubscribe99 = onSnapshot(q99, (querySnapshot) => {
-      setTeamData(querySnapshot.data());
-    }); 
 
   }, []);
 

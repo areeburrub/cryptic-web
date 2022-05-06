@@ -21,7 +21,7 @@ import { useRouter } from "next/router";
 
 const Admin = () => {
   const router = useRouter();
-  const [players, setPlayers] = useState([]);
+  const [players, setPlayers] = useState([ ]);
 
   const [controls, setControls] = useState({
     isChecked:false,
