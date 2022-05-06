@@ -20,22 +20,23 @@ import { useRouter } from "next/router";
 const Admin = () => {
   const router = useRouter();
 
-  const [EmailInput, setEmailInput] = useState("")
-  const [EmailList, setEmailList] = useState([])
-
+  
   //  Make ID function, I use this to create random ID
   // credit : https://stackoverflow.com/questions/1349404/generate-random-string-characters-in-javascript
   const makeid = (length) => {
-  var result = '';
-  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  var charactersLength = characters.length;
-  for ( var i = 0; i < length; i++ ) {
-  result += characters.charAt(Math.floor(Math.random() * 
-  charactersLength));
+    var result = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * 
+      charactersLength));
+    }
+    return result;
   }
-  return result;
-  }
-
+  
+  const [EmailInput, setEmailInput] = useState("")
+  
+  const [EmailList, setEmailList] = useState([])
   useEffect(() => {
     const q = query(collection(db, "Email"), orderBy("email"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -44,7 +45,13 @@ const Admin = () => {
         data.push(doc.data());
       });
       setEmailList(data);
+      const docRef = doc(db, "Controls", "Emails");
+      const email = {
+        Emails: data,
+      };
+      setDoc(docRef, email);
     });
+
   }, []);
 
   const handleFormSubmit = (e) => {
@@ -87,10 +94,6 @@ const Admin = () => {
         Back
       </span>
       <h1 className={styles.heading}>Manage Users</h1>
-      <form className={styles.AddEmail} onSubmit={(e)=>{handleFormSubmit(e)}}>
-        <input type="email" name="email" value={EmailInput} placeholder="Enter Email to Add" onChange={(e)=>{setEmailInput(e.target.value)}}/>
-        <button type="submit">Add</button>
-      </form>
       <div className={styles.userList}>
 
         {EmailList.map(email => (

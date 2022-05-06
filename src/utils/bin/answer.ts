@@ -6,9 +6,10 @@ import { doc, getDoc, updateDoc, increment,query,collection,getDocs } from "fire
 const question = async (args: string[]): Promise<string> => {
      const data = await getQuestion();
      const user = auth.currentUser;
-     const docRef = doc(db, "Users", user.uid);
-     const docSnap = await getDoc(docRef);
-     const userData = docSnap.data();
+  const docRef1 = doc(db, "Users", user.uid);
+  const docSnap1 = await getDoc(docRef1);
+  const userData = docSnap1.data();
+  const docRef = doc(db, "Teams", userData.tid);
 
     const q2 = query(collection(db, "Controls"));
     const querySnapshot = await getDocs(q2);
@@ -24,8 +25,7 @@ const question = async (args: string[]): Promise<string> => {
      if(!accepting[0].isChecked){
       
           return `
-We are no more accepting answers.
-Wait for results to be released
+Answer Response is Turned off
           `
      }
 

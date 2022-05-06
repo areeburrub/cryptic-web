@@ -3,7 +3,7 @@ import { useUserContext } from "../src/context/authContext";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { db } from "../src/firebase";
-import { collection, query, where, getDocs, orderBy, onSnapshot } from "firebase/firestore";
+import { collection, query, where, getDocs, orderBy,doc, onSnapshot } from "firebase/firestore";
 
 export function withPublic(Component) {
   return function WithPublic(props) {
@@ -22,20 +22,26 @@ export function withProtected(Component) {
 
     const [EmailExist, setEmailExist] = useState(true);
 
+    const emailUpadate = async () =>{
+      // const q = query(collection(db, "Email"), orderBy("email"));
+      // const querySnapshot = await getDocs(q);
+      // const emails = [];
+      // querySnapshot.forEach((doc) => {
+      //   emails.push(doc.data());
+      // });
+
+      const docRef = doc(db, "Controls", "Emails");
+      const docSnap = await getDoc(docRef);
+      const emails = docSnap.data().Emails
+      if (emails.find((emailList) => emailList.email == useauth.user?.email)) {
+        setEmailExist(true);
+      } else {
+        setEmailExist(false);
+      }
+    }
+
     useEffect(() => {
-      const q = query(collection(db, "Email"), orderBy("email"));
-      const unsubscribe = onSnapshot(q, (querySnapshot) => {
-        const data = [];
-        querySnapshot.forEach((doc) => {
-          data.push(doc.data());
-        });
-        if (data.find(emailList => emailList.email == useauth.user?.email)){
-          setEmailExist(true);
-        }
-        else{
-          setEmailExist(false);
-        }
-      });
+      emailUpadate();
     }, []);
 
 

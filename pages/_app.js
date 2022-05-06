@@ -10,17 +10,17 @@ function MyApp({ Component, pageProps }) {
       <>
     <UserContextProvider>
       <AuthStateChanged>
-        <ToastContainer
-        position="bottom-center"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover/>
-        <Component {...pageProps} />
+          <ToastContainer
+          position="bottom-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover/>
+          <Component {...pageProps} />
       </AuthStateChanged>
     </UserContextProvider>
     </>

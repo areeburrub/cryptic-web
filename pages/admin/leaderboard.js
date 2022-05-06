@@ -23,7 +23,7 @@ const Leaderboard = () => {
   const [players, setPlayers] = useState([]);
 
   useEffect(() => {
-    const q = query(collection(db, "Users"), orderBy("points", "desc"));
+    const q = query(collection(db, "Teams"), orderBy("points", "desc"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const data = [];
       querySnapshot.forEach((doc) => {
@@ -33,10 +33,44 @@ const Leaderboard = () => {
     });
     
   }, []);
+
+  
+  const [EmailList, setEmailList] = useState([])
+  useEffect(() => {
+    const q = query(collection(db, "Email"), orderBy("email"));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      const data = [];
+      querySnapshot.forEach((doc) => {
+        data.push(doc.data());
+      });
+      setEmailList(data);
+    });
+  }, []);
+
+  
+  const [CopyList, setCopyList] = useState([]);
+  
+  
+  useEffect(() => {
+    
+      const Leaderboard = EmailList.map((item, index) => {
+        players.forEach((item2) => {
+          if (item.id === item2.id) {
+            item = Object.assign(item, item2);
+          }
+        });
+        return item;
+      });
+      setCopyList(Leaderboard);
+  }, [EmailList,players])
+  
+
+  console.log(Leaderboard);
+
   return (
     <div className={styles.main}>
       <h1 className={styles.heading}>Leaderboard</h1>
-      <span className={styles.copyToClipboardBtn} onClick={() => {navigator.clipboard.writeText(JSON.stringify(players))}}>
+      <span className={styles.copyToClipboardBtn} onClick={() => {navigator.clipboard.writeText(JSON.stringify(CopyList))}}>
         Copy Leaderboard as JSON to clipboard
       </span>
       
@@ -47,14 +81,14 @@ const Leaderboard = () => {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 className={styles.playerImg}
-                src={player.photo}
+                src={"https://ui-avatars.com/api/?background=random&name="+player.name}
                 alt={player.displayName}
               />
               <span className={styles.playerName}>
-                  {index+1 + " - " +player.displayName}
+                  {index+1 + " - " +player.name}
               </span>
               <span className={styles.playerPts}>{player.points} pts - {player.level} Level</span>
-              <a href={'/admin/users/attempt/' + player.uid} className={styles.playerPts}>View Logs</a>
+              <a href={'/admin/users/attempt/' + player.tid} className={styles.playerPts}>View Logs</a>
             </div>
           );
         })}
