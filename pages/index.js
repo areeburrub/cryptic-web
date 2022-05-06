@@ -16,6 +16,17 @@ const Home = () => {
     router.replace("/dashboard");
   }
 
+  const msg = `
+Welcome to the Cryptic hunt! Glad You are here.
+
+As u are aware, cryptic hunt event is an online treasure hunt being conducted under the Metacognition '22 by Team Enthiran ! 
+
+Before beginning, please go through the below mentioned rules and Guidelines!
+
+We wish you luck!
+
+  `
+
   return (
     <div className={styles.container}  style={{ background: `linear-gradient(#00000053,#0000008b) , url("/main-bg.gif")  no-repeat center center `, backgroundSize:"cover" }}>
       <Head>
@@ -31,27 +42,9 @@ const Home = () => {
             Cryptic Hunt
           </h1>
           <p className={styles.description}>            
+            {msg}
             
-            Rules & Guidelines:<br/>
-            1. Only lowercase letters should be used<br/>
-            2. use PCs, laptops, etc for better experience<br/>
-            <br/>
-            <br/>
-            All the very best Guys!!!
-            <br/>
-            <br/>
-            Date : 6 th - 7 th May 2022
-            <br/>
-            <br/>
-
-            Event Registration Fees:<br/>
-            ₹150 for team(up to 4 members)<br/>
-            ₹ 60for individual
-            <br/>
-            <br/>
-
-            Registration Link : <a href="https://docs.google.com/forms/d/e/1FAIpQLScIs7qTLrEfJEi-MhSoanHwFu1HtTf4h-Zr6hFvqMuVhJclVw/viewform?usp=sf_link" target="__blank">click here</a>
-          
+  Get Rules & Guidelines : <a href="https://firebasestorage.googleapis.com/v0/b/cryptic-22.appspot.com/o/rules.pdf?alt=media&token=be89d62f-94fe-420b-9417-69d7733e71c2" target="__blank" download>click here</a>
           </p>
         </div>
 

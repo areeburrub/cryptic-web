@@ -33,6 +33,11 @@
   font-family: dosis;
   text-transform: uppercase;
 }
+
+.description{
+  white-space: pre-wrap;
+}
+
 .main .content .description{
   font-size: 2ch;
   font-weight: 300;

@@ -482,6 +482,20 @@ input[type=checkbox].switch:checked + div > div {
   padding:20px;
   border-radius:20px;
 }
+
+.controlAbout{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content: space-between;
+  background: #fff;
+  margin:20px auto;
+  width: fit-content;
+  width:90vw;
+  max-width:560px;
+  padding:20px;
+  border-radius:20px;
+}
 .control .text{
   font-size:2.2ch;
 }
