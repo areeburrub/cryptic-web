@@ -11,7 +11,8 @@ import {
   collection,
   where,
   getDoc,
-  getDocs
+  getDocs,
+  limit
 } from "firebase/firestore";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { db } from "../src/firebase";
@@ -128,17 +129,25 @@ const querySnapshot = await getDocs(qU);
 
   useEffect(() => {
 
-    const q = query(collection(db, "Users"), orderBy("points", "desc"));
+    const q = query(collection(db, "Users"), orderBy("points", "desc"),limit(5));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const data = [];
       querySnapshot.forEach((doc) => {
         data.push(doc.data());
       });
       setPlayers(data);
-      const CurrentPlayer = data.filter((player) => player.uid === user.uid);
-      setuserData(CurrentPlayer[0]);
+    });
+    
+    const qq4 = query(collection(db, "Users"), where("uid","==", user.uid));
+    const unsubscribe4 = onSnapshot(qq4, (querySnapshot) => {
+      const data = [];
+      querySnapshot.forEach((doc) => {
+        data.push(doc.data());
+      });
+      setuserData(data[0]);
 
     });
+
 
     //update score
     const q4 = query(collection(db, "Questions"), where("level", "==", userData.level));
@@ -245,7 +254,7 @@ const querySnapshot = await getDocs(qU);
           </motion.div>
 
           <div className={styles.leaderboard} >
-            <h2>Leaderboard</h2>
+            <h2>Top 5 Hunters</h2>
 
             <div className={styles.players}>
               {players.map((player, index) => {
