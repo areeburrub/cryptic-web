@@ -127,18 +127,6 @@ const querySnapshot = await getDocs(qU);
   
 
   useEffect(() => {
-    const unsub = onSnapshot(doc(db, "Users", user.uid), (doc) => {
-      setuserData(doc.data());
-    });
-
-    const qU = query(collection(db, "Questions"), where("level", "==", userData.level));
-    const unsubs = onSnapshot(qU, (querySnapshot) => {
-        const Bondata = [];
-        querySnapshot.forEach((doc) => {
-          Bondata.push(doc.data());
-        });
-        setIsBon(Bondata[0].bonus);
-      });
 
     const q = query(collection(db, "Users"), orderBy("points", "desc"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -147,6 +135,9 @@ const querySnapshot = await getDocs(qU);
         data.push(doc.data());
       });
       setPlayers(data);
+      const CurrentPlayer = data.filter((player) => player.uid === user.uid);
+      setuserData(CurrentPlayer[0]);
+
     });
 
     //update score
@@ -157,6 +148,7 @@ const querySnapshot = await getDocs(qU);
         d5.push(doc.data());
       });
       setPoint(d5[0].pts);
+      setIsBon(d5[0].bonus);
     });
 
     const q2 = query(collection(db, "Controls"));
@@ -165,7 +157,7 @@ const querySnapshot = await getDocs(qU);
       querySnapshot.forEach((doc) => {
         data.push(doc.data());
       });
-      data[0].isChecked ? toast.success(`Cryptic Hunt Started and will end on 7th May 2022 at 11:59PM`, { toastId: "unique" }) : toast.error(`Cryptic Hunt ended no answers will recored from now`, { toastId: "uniqueID" });
+      data[0].isChecked ? toast.success(`You can Answer Now`, { toastId: "unique" }) : toast.error(`Answers are not Being Recorded`, { toastId: "uniqueID" });
     });
   }, []);
 

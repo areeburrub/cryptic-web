@@ -24,8 +24,7 @@ const question = async (args: string[]): Promise<string> => {
      if(!accepting[0].isChecked){
       
           return `
-We are no more accepting answers.
-Wait for results to be released
+Answers are not being recorded
           `
      }
 

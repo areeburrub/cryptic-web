@@ -35,17 +35,21 @@ const Admin = () => {
   }
   return result;
   }
-
-  useEffect(() => {
-    const q = query(collection(db, "Email"), orderBy("email"));
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      const data = [];
-      querySnapshot.forEach((doc) => {
-        data.push(doc.data());
-      });
-      setEmailList(data);
-    });
-  }, []);
+ useEffect(() => {
+   const q = query(collection(db, "Email"), orderBy("email"));
+   const unsubscribe = onSnapshot(q, (querySnapshot) => {
+     const data = [];
+     querySnapshot.forEach((doc) => {
+       data.push(doc.data());
+     });
+     setEmailList(data);
+     const docRef = doc(db, "Controls", "Emails");
+     const email = {
+       Emails: data,
+     };
+     setDoc(docRef, email);
+   });
+ }, []);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
