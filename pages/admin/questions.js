@@ -69,6 +69,9 @@ const Admin = () => {
     setQuestionModal(true);
   };
 
+
+  
+
   useEffect(() => {
     const q = query(collection(db, "Questions"), orderBy("level"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -78,6 +81,7 @@ const Admin = () => {
       });
       setQuestion(data);
     });
+
   }, []);
 
   return (

@@ -24,6 +24,7 @@
   color: #fff;
   background: #1e070786;
   padding: 20px;
+  white-space: pre-wrap;
 }
 
 .main .content .title{

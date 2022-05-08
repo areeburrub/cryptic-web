@@ -22,20 +22,20 @@ export function withProtected(Component) {
 
     const [EmailExist, setEmailExist] = useState(true);
 
-    const emailUpdate = async () => {
-       const docRef = doc(db, "Controls", "Emails");
-        const docSnap = await getDoc(docRef);
-        const emails = docSnap.data().Emails
-        if (emails.find(emailList => emailList.email == useauth.user?.email)){
-          setEmailExist(true);
-        }
-        else{
-          setEmailExist(false);
-        }
-    }
-    useEffect(() => {
-      emailUpdate();
-    }, [])
+    // const emailUpdate = async () => {
+    //    const docRef = doc(db, "Controls", "Emails");
+    //     const docSnap = await getDoc(docRef);
+    //     const emails = docSnap.data().Emails
+    //     if (emails.find(emailList => emailList.email == useauth.user?.email)){
+    //       setEmailExist(true);
+    //     }
+    //     else{
+    //       setEmailExist(false);
+    //     }
+    // }
+    // useEffect(() => {
+    //   emailUpdate();
+    // }, [])
     
 
     if (!useauth.user || !EmailExist) {

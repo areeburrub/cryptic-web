@@ -35,7 +35,63 @@ const Home = () => {
   const { user } = useUserContext();
   const username = user.displayName.replace(/\s/g, "").toLowerCase();
   const [userData, setuserData] = useState(user);
-  const [players, setPlayers] = useState([]);
+  const [players, setPlayers] = useState(
+    [{
+  "level": 11,
+  "createdAt": "2022-05-07T04:51:29.781Z",
+  "photo": "https://lh3.googleusercontent.com/a-/AOh14GjQEw6Qve_8DDqV6eUsaQ3XEXjt4MjTr3u1Rx2YnA=s96-c",
+  "displayName": "Lord Itachi",
+  "hint": false,
+  "email": "mehulkumar2199@gmail.com",
+  "points": 1120,
+  "uid": "a0uZnWDMVFdXXGHPWnHwLHHbGzQ2"
+}, {
+  "createdAt": "2022-05-07T04:06:34.805Z",
+  "uid": "GtTxKXUxvMXaAG89wd2TIrbHU793",
+  "level": 11,
+  "hint": false,
+  "photo": "https://lh3.googleusercontent.com/a-/AOh14Gh1cHRSj7CzdX8HYRYWqlocM7i9ChJsp2YTM-Z8=s96-c",
+  "email": "karthick17702@gmail.com",
+  "displayName": "Karthick K",
+  "points": 1040
+}, {
+  "photo": "https://lh3.googleusercontent.com/a-/AOh14GgoGdEVMgCU9Dq50jNBtSJ01d-gcQsn-ROI8EpU5A=s96-c",
+  "uid": "gSgSERQhZJRi7JGzLN5MM3e2qZ33",
+  "email": "riteshsagar2002@gmail.com",
+  "displayName": "Ritesh Sagar",
+  "createdAt": "2022-05-07T10:26:09.437Z",
+  "points": 1010,
+  "hint": false,
+  "level": 11
+}, {
+  "displayName": " Parth Shinde",
+  "points": 1010,
+  "uid": "OC6Ci1Nr5La8Iaw6wiHYEB37U1G2",
+  "createdAt": "2022-05-07T06:44:38.718Z",
+  "photo": "https://lh3.googleusercontent.com/a/AATXAJzdvdWldwVTxHjbF04LBWaphR1gpfHEjRRpDVdM=s96-c",
+  "hint": false,
+  "level": 11,
+  "email": "parthshinde91@gmail.com"
+}, {
+  "photo": "https://lh3.googleusercontent.com/a-/AOh14Gi_ekhigQIFhzdljyJjgAmV1YHeOBK5j8G4JqdytA=s96-c",
+  "hint": false,
+  "level": 11,
+  "uid": "IW3mmRHyW9SmEAuyf4XCCjFDB0w1",
+  "displayName": "Samiksha Chaudhari",
+  "createdAt": "2022-05-07T08:06:56.033Z",
+  "points": 1010,
+  "email": "samichaudhari82@gmail.com"
+}, {
+  "uid": "CNZO0Xd7pYd9sEt7hceBKE4u8372",
+  "email": "gauravss3703@gmail.com",
+  "createdAt": "2022-05-07T08:22:02.106Z",
+  "points": 1010,
+  "level": 11,
+  "hint": false,
+  "displayName": "Gaurav Suryawanshi",
+  "photo": "https://lh3.googleusercontent.com/a-/AOh14GgNMypLVb-zE_vHS8VpJsF-3HASbg4-fcI_NDZoOQ=s96-c"
+}]
+  );
 
   const [output, setOutput] = useState([]);
   const [input, setInput] = useState("");
@@ -69,28 +125,11 @@ const Home = () => {
 
   const [Point, setPoint] = useState(0);
   
-  const getPts = async () =>{
-  const docRef = doc(db, "Users", user.uid);
-  const docSnap = await getDoc(docRef);
-  const userData = docSnap.data();
-  }
-
-const UpdateBonusState = async() =>{
-const qU = query(collection(db, "Questions"), where("level", "==", userData.level));
-const querySnapshot = await getDocs(qU);
-      const Bondata = [];
-      querySnapshot.forEach((doc) => {
-        Bondata.push(doc.data());
-      });
-      setIsBon(Bondata[0].bonus);
-}
 
   useEffect(()=>{
-    getPts();
     PointsBounce.start({
       y: ["0px", "-30px", "20px", "0px"]
     });
-    UpdateBonusState();
   }, [userData])
 
   const [inputRef, setInputFocus] = useFocus();
@@ -127,17 +166,10 @@ const querySnapshot = await getDocs(qU);
   }, [isBon])
   
 
+
   useEffect(() => {
 
-    const q = query(collection(db, "Users"), orderBy("points", "desc"),limit(5));
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      const data = [];
-      querySnapshot.forEach((doc) => {
-        data.push(doc.data());
-      });
-      setPlayers(data);
-    });
-    
+
     const qq4 = query(collection(db, "Users"), where("uid","==", user.uid));
     const unsubscribe4 = onSnapshot(qq4, (querySnapshot) => {
       const data = [];
@@ -145,8 +177,8 @@ const querySnapshot = await getDocs(qU);
         data.push(doc.data());
       });
       setuserData(data[0]);
-
     });
+
 
 
     //update score
@@ -166,7 +198,7 @@ const querySnapshot = await getDocs(qU);
       querySnapshot.forEach((doc) => {
         data.push(doc.data());
       });
-      data[0].isChecked ? toast.success(`You can Answer Now`, { toastId: "unique" }) : toast.error(`Answers are not Being Recorded`, { toastId: "uniqueID" });
+      data[0].isChecked ? toast.success(`Anyone can Answer Now`, { toastId: "unique" }) : toast.error(`Answers are not Being Recorded`, { toastId: "uniqueID" });
     });
   }, []);
 
@@ -254,7 +286,7 @@ const querySnapshot = await getDocs(qU);
           </motion.div>
 
           <div className={styles.leaderboard} >
-            <h2>Top 5 Hunters</h2>
+            <h2>Final Leaderboard</h2>
 
             <div className={styles.players}>
               {players.map((player, index) => {
@@ -267,7 +299,7 @@ const querySnapshot = await getDocs(qU);
                       alt={player.displayName}
                     />
                     <span className={styles.playerName}>
-                      {player.displayName}
+                      {index+1 + " - " + player.displayName}
                     </span>
                     <span className={styles.playerPts}>{player.points}pts</span>
                   </div>

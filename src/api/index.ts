@@ -27,6 +27,8 @@ export const getQuestion = async () =>{
     data.push(doc.data());
   });
 
+  
+
   const output = await data[0];;
 
   return output;
