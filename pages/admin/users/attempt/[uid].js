@@ -13,7 +13,8 @@ import {
   onSnapshot,
   deleteDoc,
   getDoc,
-  where
+  where,
+  limit
 } from "firebase/firestore";
 import { useRouter } from "next/router";
 import { useUserContext } from "../../../../src/context/authContext";
@@ -34,7 +35,7 @@ const getUser = async() =>{
   setuserData(Data);
 }
   useEffect(() => {
-    const q = query(collection(db, "Attempts"), where("uid", "==", uid), orderBy("time","desc"));
+    const q = query(collection(db, "Attempts"), where("uid", "==", uid), orderBy("time","desc"),limit(10));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const data = [];
       querySnapshot.forEach((doc) => {
