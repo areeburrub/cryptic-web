@@ -286,7 +286,7 @@ const Home = () => {
           </motion.div>
 
           <div className={styles.leaderboard} >
-            <h2>Final Leaderboard</h2>
+            <h2>Final Winners</h2>
 
             <div className={styles.players}>
               {players.map((player, index) => {
